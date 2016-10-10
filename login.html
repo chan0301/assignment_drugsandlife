@@ -1,0 +1,62 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta charset="utf-8">
+<title>Drugs and Life</title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  <script>
+    <!--login-->
+function login() {
+    var username=$("#loginusername").val();
+    var pass1=$("#loginpassword").val();
+    var myData = 'username='+username+'&password='+pass1;		
+        $.ajax({
+  		  	 url:'login.php',
+  			   type:"GET",
+           dataType : 'text',
+  			   data:myData,
+        success: function(mymsg,msg){	
+			alert(mymsg);
+			if(mymsg == "Login Successful"){
+		localStorage.username = $("#loginusername").val();
+		window.location.replace("index.html");
+    				alert(msg);}
+                },
+                 error:function(xhr, ajaxOptions, thrownError){
+                    alert(xhr.status);
+                    alert(thrownError);
+                 }
+            });
+	
+};	
+</script>
+</head> 
+<body> 
+
+<div id="login" data-role="page">
+  <div data-role="header" data-position="fixed" data-theme="b">
+    <h3>Login</h3>
+    <a href="index.html">Back</a>
+  </div>
+  <div>
+  <h1 align="center">Drugs and Life</h1>
+  </div>
+      <div class="ui-field-contain" align="center" style="margin:60px">
+      <h4>Username</h4>
+      <input type="text" id="loginusername">
+      <h4>Password</h4>
+      <input type="password" id="loginpassword">
+      <br>
+      <button type="submit" id="login" onClick="login()">Login</button>
+	  <a href="register.html" rel="external"><button id="signup">Sign up</button></a>
+      </div>
+  <div data-role="footer" data-position="fixed" data-theme="b">
+    <h3></h3>
+  </div>
+</div>
+
+</body>
+</html>

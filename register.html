@@ -1,0 +1,75 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta charset="utf-8">
+<title>Drugs and Life</title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  <!--submit register-->
+  <script> 
+  function submitinfo() {
+    var username=$("#username").val();
+    var pass1=$("#password").val();
+    var pass2=$("#repassword").val();
+	var email=$("#email").val();
+	
+	if(pass1==pass2){
+	}else{
+		alert("Password does not match");
+	    return;	
+	}
+    var myData = 'username='+username+'&password='+pass1+"&email="+email; 		
+        $.ajax({
+  		  	 url:'register.php',
+  			   type:"POST",
+           dataType : 'text',
+  			   data:myData,
+        success: function(mymsg){
+			alert(mymsg);
+			if (mymsg == "successful")
+			{
+				alert("Registered Successfully, Redirecting To Login Page");
+				window.location.replace("login.html");
+				
+			}     
+                },
+                 error:function(xhr, ajaxOptions, thrownError){
+                    alert(xhr.status);
+                    alert(thrownError);
+                 }
+            }); 
+	
+};
+  </script>
+
+</head> 
+<body> 
+
+<div id="register" data-role="page">
+  <div data-role="header" data-position="fixed" data-theme="b">
+    <h3>Register</h3>
+    <a href="index.html">Back</a>
+  </div>
+  <div>
+  <h1 align="center">Drugs and Life</h1>
+  </div>
+    <div class="ui-field-contain" align="center" style="margin:60px">
+      <h4>Username</h4>
+      <input type="text" id="username">
+      <h4>Password</h4>
+      <input type="password" id="password">
+      <h4>Re-enter Password</h4>
+      <input type="password" id="repassword">
+      <h4>Email</h4>
+      <input type="text" id="email">
+      <br>
+      <button type="submit" id="submit" onClick="submitinfo()">Submit</button>
+      </div>
+  <div data-role="footer" data-position="fixed" data-theme="b">
+    <h3></h3>
+  </div>
+</div>
+</body>
+</html>

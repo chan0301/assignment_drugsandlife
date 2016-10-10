@@ -1,0 +1,129 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta charset="utf-8">
+<title>Drugs and Life</title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  <script>
+    <!--login-->
+function login() {
+    var username=$("#loginusername").val();
+    var pass1=$("#loginpassword").val();
+    var myData = 'username='+username+'&password='+pass1;		
+        $.ajax({
+  		  	 url:'login.php',
+  			   type:"GET",
+           dataType : 'text',
+  			   data:myData,
+        success: function(mymsg,msg){	
+			alert(mymsg);
+			if(mymsg == "Login Successful"){
+		localStorage.username = $("#loginusername").val();
+		window.location.replace("index.html");
+    				alert(msg);}
+                },
+                 error:function(xhr, ajaxOptions, thrownError){
+                    alert(xhr.status);
+                    alert(thrownError);
+                 }
+            });
+	
+};	
+</script>
+  <!--submit register-->
+  <script> 
+  function submitinfo() {
+    var username=$("#username").val();
+    var pass1=$("#password").val();
+    var pass2=$("#repassword").val();
+	var email=$("#email").val();
+	
+	if(pass1==pass2){
+	}else{
+		alert("Password does not match");
+	    return;	
+	}
+    var myData = 'username='+username+'&password='+pass1+"&email="+email; 		
+        $.ajax({
+  		  	 url:'register.php',
+  			   type:"POST",
+           dataType : 'text',
+  			   data:myData,
+        success: function(mymsg){
+			alert(mymsg);
+			if (mymsg == "successful")
+			{
+				alert("Registered Successfully, Redirecting To Login Page");
+				window.location.replace("login.html");
+				
+			}     
+                },
+                 error:function(xhr, ajaxOptions, thrownError){
+                    alert(xhr.status);
+                    alert(thrownError);
+                 }
+            }); 
+	
+};
+  </script>
+<!--logout-->
+<script>
+  function clearstorage(){
+	  localStorage.removeItem("username"); 
+	  window.location.replace("login.html");
+	  alert("Logged out Successful");
+  };
+</script>
+
+</head> 
+<body> 
+
+<div id="home" data-role="page">
+  <div data-role="header" data-position="fixed" data-theme="b">
+    <h3>Home</h3>
+    <a href="login.html" data-role="button" role="button" >Login</a>
+    <a href="profile.html" data-role="button" role="button" rel="external">Profile</a>
+  </div>
+  <div>
+  <h1 align="center">Drugs and Life</h1>
+  </div>
+  <div role="main" class="ui-content">
+    <div data-role="navbar">
+      <ul>
+        <li>
+          <a href="index.html">Home</a>
+        </li>
+        <li>
+          <a href="type.html" rel="external">Types</a>
+        </li>
+        <li>
+          <a href="clinic.html">Clinic</a>
+        </li>
+        <li>
+          <a href="media.html">Media</a>
+        </li>
+        <li>
+          <a href="comment.html" rel="external">Comment</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div align="center" style="margin:80px">
+  <img src="image/index.jpg" width="360" height="240">
+  <h2>What is Drugs Abuse?</h2>
+  <h4>Drugs abuse means the user consumes the amounts of drugs or with methods which are harmful. This might causes: </h4>
+  <h3><li>Physical damages</li>
+  <li>Social impacts</li>
+  <li>Psychological damages</li>
+  <h4>Although every damage done is terminal, patients can recover from addiction through treatment.</h4>
+  </div>
+  <div data-role="footer" data-position="fixed" data-theme="b">
+    <h3></h3>
+  </div>
+</div>
+
+</body>
+</html>

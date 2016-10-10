@@ -1,0 +1,56 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta charset="utf-8">
+<title>Drugs and Life</title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script>
+<!--checklogin-->
+  $(document).ready(function checklogin(){
+	  var storname = window.localStorage.getItem("username");
+  if ( storname == undefined){
+	  alert("You are not logged in, Redirect to Login Page...");
+	  window.location.replace("login.html");
+	}else{
+	  document.getElementById("welcome").innerHTML = localStorage.getItem("username");
+	};
+  });
+</script>
+<!--logout-->
+<script>
+  function clearstorage(){
+	  localStorage.removeItem("username"); 
+	  window.location.replace("login.html");
+	  alert("Logged out Successful");
+  };
+</script>
+
+</head> 
+<body> 
+
+<div id="profile" data-role="page">
+  <div data-role="header" data-position="fixed" data-theme="b">
+    <h3>Profile</h3>
+    <a href="index.html">Back</a>
+  </div>
+  <div>
+  <h1 align="center">Drugs and Life</h1>
+  <h2 align="center">Welcome! <label id="welcome"></label></h2>
+  </div>
+  <div role="main" class="ui-content" align="center" style="margin:80px">
+     <a href="changepw.html" rel="external">
+     <button id="changePW">Change password</button>
+     </a>
+	 <button id="logout" onClick="clearstorage()">Logout</button>
+    
+  </div>
+  <div data-role="footer" data-position="fixed" data-theme="b">
+    <h3></h3>
+  </div>
+</div>
+
+</body>
+</html>
